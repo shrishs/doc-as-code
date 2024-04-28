@@ -1,0 +1,128 @@
+= {subject} - {customer}             
+:subject: Engineering Labs - Platform Navigator 
+:doctype: book
+:confidentiality: Confidential
+:customer: Customer XXX
+:listing-caption: Listing
+:toc:
+:toclevels: 6
+:pdf-page-size: A4
+:pdf-style: engagement
+:pdf-stylesdir: .
+:numbered:
+:title-page-background-image: image:img/title-background.png[position=center center]
+:revnumber: 0.1
+
+
+
+== History and Revisions
+
+[cols=4,cols="1,1,3,4",options=header]
+|===
+|Version
+|Date
+|Authors
+|Changes
+
+
+|0.1
+|02-Jan-2024
+|Author one <author1@xlab.com>
+|Added Installation section.
+
+|0.2
+|19-Jan-2024
+|Author two <author2@xlab.com>
+|Incorporate review comment in Installation section.
+
+|===
+
+== Introduction
+
+This enagement reprt describes my engadement i have done for the {customer} .
+
+== Architecture Landscape
+
+.Supervisor Cluster Networking
+image::img/tkgs-architecture.png[tkgs-architecture.png]
+
+== Installation
+Following activities are carried out during installation.
+
+=== Environment Validation
+
+* Verification of management network in vSphere.
+* Verification of NSX-T configuration
+
+=== Active Directory  Configuration
+
+Verify and configure which active directory to use.
+
+=== Content Repository creation
+
+Verify and configure if offline content repository is required.
+
+=== Storage Policy Creation
+
+=== Supervisor Cluster Enablement
+
+.Workload Networking
+image::img/tkgs-workload-network.png[tkgs-workload-network.png]
+
+=== Harbor registry  Enablement
+
+== Connecting to Supervisor Cluster
+
+=== Native Pods
+
+==== Pushing images to Harbor registry
+
+==== Creating native pods
+
+=== Creating Tanzu Kubernetes Cluster
+
+== Connecting to Tanzu Kubernetes Cluster
+
+=== Creating pods
+
+== Logging 
+
+=== Logging integration with vRealize Log Insight
+
+== Monitoring
+
+=== Logging integration with vRealize Operation
+
+== Problem Encountered
+
+=== Networking issue
+
+==== Support Ticket created
+
+* https://cert-manager.io/docs/[NSX MTU issue] 
+* https://cert-manager.io/docs/[Harbor registry issue]
+
+== Known bugs
+* istio control plane only installs in istio-system namespace
+https://github.com/istio/istio/issues/24037
+
+== Appendix
+
+=== Gateway Definition
+[source,yaml]
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: bookinfo-gateway
+  namespace: bookinfo
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - productpage.bookinfo.nationwide.co.uk
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
+
